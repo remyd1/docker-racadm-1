@@ -1,8 +1,23 @@
-FROM centos:6.6
+FROM centos:stream9 
 
-RUN yum install wget perl dmidecode -y
+RUN dnf update && \
+  dnf install wget perl git dmidecode openssl openssl-devel python3-pip python3-setuptools -yqq
 
-RUN wget -q -O - http://linux.dell.com/repo/hardware/latest/bootstrap.cgi | bash && yum -y install srvadmin-idrac
+WORKDIR /tmp
+RUN wget http://linux.dell.com/repo/hardware/latest/bootstrap.cgi 
+RUN bash /tmp/bootstrap.cgi 
+RUN dnf -yqq install srvadmin-idrac
+
+# useful racadm tools
+
+RUN git clone https://opendev.org/openstack/python-dracclient.git
+RUN cd python-dracclient && \
+  python3 -m pip install -r requirements.txt && \
+  python3 setup.py install
+
+RUN git clone https://github.com/remyd1/racadm_init.git /opt/racadm_init
+
+RUN dnf clean all
 
 COPY entrypoint.sh /
 
