@@ -19,6 +19,8 @@ RUN git clone https://github.com/remyd1/racadm_init.git /opt/racadm_init
 
 RUN dnf clean all
 
-COPY entrypoint.sh /
+RUN ln -s /opt/dell/srvadmin/sbin/racadm /usr/bin/racadm
 
-ENTRYPOINT ["/entrypoint.sh"]
+#COPY entrypoint.sh /
+
+#ENTRYPOINT ["/entrypoint.sh"]

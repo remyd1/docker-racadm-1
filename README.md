@@ -6,10 +6,10 @@ Example usage:
 
 ```bash
 podman build -t racadm-with-python-dracclient:centos9 .
-timeout 15 podman run -ti racadm-with-python-dracclient:centos9 -u root -p root -r 192.168.1.10 racdump
+podman run -ti racadm-with-python-dracclient:centos9 racadm -u root -p root -r 192.168.1.10 racdump
+# if you have network issue, you can also precede your command with a timeout
+timeout -s SIGKILL 25 podman run -ti racadm-with-python-dracclient:centos9 racadm -u root -p root -r 192.168.1.10 racdump
 ```
-
-The entrypoint is racadm so there is no need to prepend that to your commands.
 
 ## Other tools
 
