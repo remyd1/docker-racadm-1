@@ -1,7 +1,8 @@
 FROM quay.io/centos/centos:stream9 
 
 RUN dnf update && \
-  dnf install wget perl git dmidecode openssl openssl-devel python3-pip python3-setuptools sudo -yqq
+  dnf install wget perl git dmidecode openssl openssl-devel \
+  python3-pip python3-setuptools sudo ipmitool -yqq
 
 WORKDIR /tmp
 RUN wget http://linux.dell.com/repo/hardware/latest/bootstrap.cgi 

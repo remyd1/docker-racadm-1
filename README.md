@@ -13,4 +13,12 @@ timeout -s SIGKILL 25 podman run -ti racadm-with-python-dracclient:centos9 racad
 
 ## Other tools
 
-other tools are included in the image like [`python-dracclient`](https://opendev.org/openstack/python-dracclient/) and [`racadm_init`](https://github.com/remyd1/racadm_init).
+Other tools are included in the image like [`python-dracclient`](https://opendev.org/openstack/python-dracclient/) and [`racadm_init`](https://github.com/remyd1/racadm_init).
+
+Usage example with racadm_init:
+
+```bash
+wget https://raw.githubusercontent.com/remyd1/racadm_init/master/racadm_local.conf
+vim racadm_local.conf
+podman run -v `pwd`/racadm_local.conf:/etc/racadm_local.conf:ro racadm-with-python-dracclient:centos9 racadm_init 192.168.1.10 getraclogs
+```
