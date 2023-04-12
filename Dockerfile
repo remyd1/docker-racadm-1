@@ -1,4 +1,4 @@
-FROM centos:stream9 
+FROM quay.io/centos/centos:stream9 
 
 RUN dnf update && \
   dnf install wget perl git dmidecode openssl openssl-devel python3-pip python3-setuptools -yqq
